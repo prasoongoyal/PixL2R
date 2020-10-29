@@ -32,3 +32,7 @@ To train the model with language-based rewards in addition to extrinsic rewards,
 python train_policy.py --obj-id=6 --env-id=1 --reward-type=<sparse|dense> --model-file=/path/to/PixL2R/model --descr-id=<0|1|2>
 ```
 
+## Acknowledgements
+The codebase is based on the following repositories:
+1. https://github.com/rlworkgroup/metaworld
+2. https://github.com/nikhilbarhate99/PPO-PyTorch
