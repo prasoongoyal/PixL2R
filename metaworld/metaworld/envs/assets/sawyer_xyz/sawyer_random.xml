@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mujoco>
+    <include file="shared_config.xml"></include>
+    <worldbody>
+        <include file="sawyer_xyz_base_no_table.xml"></include>
+
+        <geom name="tableTop" type="box" pos="0 0.75 -0.05" size="0.6 0.6 0.05"
+          rgba=".6 .6 .5 1" contype="1" conaffinity="1" friction="2 0.1 0.002" material="light_wood_v3"/>
+
+        <!-- button / button_wall -->
+        <body name="button_top" pos="0 0.88 0.12">
+          <inertial pos="0 0 0" mass="0.1" diaginertia="100000 100000 100000"/>
+          <geom name="button_top" fromto="0 0 -0.03 0 0 0.03" rgba="0.3 1 0.3 1" size="0.03 0.06" type="cylinder" solref="0.02 1" conaffinity="1" contype="1" group="1"/>
+          <joint type="slide" range="-0.05 0" axis="0 0 1" name="button_top_goal_slidey" pos="0 0 0" damping="1.0" limited="true"/>
+          <site name="buttonTopStart" pos="0 0 0.03" size="0.005" rgba="0 0.8 0 0"/>
+        </body>
+
+        <body name="box_top" pos="0 0.8 0.05">
+          <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.1 0.05 0.05" name="box_top_left" conaffinity="1" pos="0 0 0" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1"/>
+          <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.1 0.05 0.05" name="box_top_right" conaffinity="1" pos="0 0.16 0" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1"/>
+          <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.035 0.03 0.05" name="box_top_front" conaffinity="1" pos="0.065 0.08 0" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1"/>
+          <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.035 0.03 0.05" name="box_top_behind" conaffinity="1" pos="-0.065 0.08 0" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1"/>
+          <site name="box_top_hole" pos="0 0.08 0.05" size="0.005" rgba="0 0.8 0 0"/>
+          <!-- <joint type="slide" range="-0.2 0." axis="0 1 0" name="goal_slidey" pos="0 0 0" damping="1.0"/> -->
+        </body>
+
+        <!-- button side / button_wall -->
+        <body name="button_side" pos="0 0.84 0.12">
+          <inertial pos="0 0 0" mass="0.1" diaginertia="100000 100000 100000"/>
+          <geom name="button_side" fromto="0 -0.03 0 0 0.03 0" rgba="0.3 1 0.3 1" size="0.03 0.06" type="cylinder" solref="0.02 1" conaffinity="1" contype="1" group="1"/>
+          <joint type="slide" range="0 0.05" axis="0 1 0" name="button_side_goal_slidey" pos="0 0 0" damping="1.0" limited="true"/>
+          <site name="buttonSideStart" pos="0 -0.03 0" size="0.005" rgba="0 0.8 0 1"/>
+        </body>
+
+        <body name="box_side" pos="0 0.9 0.05">
+          <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.1 0.04 0.05" name="box_side_bottom" conaffinity="1" pos="0 0 0" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1"/>
+          <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.1 0.04 0.05" name="box_side_top" conaffinity="1" pos="0 0 0.16" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1"/>
+          <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.035 0.04 0.03" name="box_side_left" conaffinity="1" pos="0.065 0 0.08" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1"/>
+          <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.035 0.04 0.03" name="box_side_right" conaffinity="1" pos="-0.065 0 0.08" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1"/>
+          <site name="box_side_hole" pos="0 -0.04 0.07" size="0.005" rgba="0 0.8 0 0"/>
+          <!-- <joint type="slide" range="-0.2 0." axis="0 1 0" name="goal_slidey" pos="0 0 0" damping="1.0"/> -->
+        </body>
+
+
+        <!-- coffee -->
+        <body name="coffee_button" pos="0 0.78 0.33">
+          <inertial pos="0 0 0" mass="0.1" diaginertia="100000 100000 100000"/>
+          <geom name="coffee_button" fromto="0 -0.03 0 0 0.03 0" rgba="0.3 1 0.3 1" size="0.03 0.06" type="cylinder" solref="0.02 1" conaffinity="1" contype="1" group="1"/>
+          <joint type="slide" range="0 0.05" axis="0 1 0" name="coffee_goal_slidey" pos="0 0 0" damping="1.0"/>
+          <site name="coffeeButtonStart" pos="0 -0.03 0" size="0.005" rgba="0 0.8 0 0"/>
+        </body>
+
+        <body name="coffee_machine" pos="0 0.9 0.28">
+          <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.1 0.1 0.02" name="coffee_box_bottom" conaffinity="1" pos="0 0 0" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1"/>
+          <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.1 0.1 0.02" name="coffee_box_top" conaffinity="1" pos="0 0 0.1" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1"/>
+          <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.035 0.1 0.03" name="coffee_box_left" conaffinity="1" pos="0.065 0 0.05" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1"/>
+          <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.035 0.1 0.03" name="coffee_box_right" conaffinity="1" pos="-0.065 0 0.05" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1"/>
+          <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.1 0.05 0.13" name="expresso_base" conaffinity="1" pos="0 0.05 -0.15" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1"/>
+          <!-- <joint type="slide" range="-0.2 0." axis="0 1 0" name="goal_slidey" pos="0 0 0" damping="1.0"/> -->
+          <site name="coffee_goal" pos="0 -0.1 -0.27" size="0.01" rgba="1 0 0 0"/>
+        </body>
+
+        <!-- handle press -->
+        <body name="handle_press_top" pos="0 0.8 0.14">
+          <inertial pos="0 0 0" mass="0.1" diaginertia="100000 100000 100000"/>
+          <!-- <geom name="handle_press_top" fromto="0 -0.03 0 0 0.03 0" rgba="0.3 1 0.3 1" size="0.03 0.06" type="cylinder" solref="0.02 1" conaffinity="1" contype="1" group="1"/> -->
+          <geom name="handle_press_top" type="box" pos="0 0 0" margin="0.001"
+                  size="0.03 0.05 0.02" rgba="1 0 0 1"
+                  contype="1" conaffinity="1"/>
+          <joint type="slide" range="-0.12 0" axis="0 0 1" name="handle_press_top_goal_slidez" pos="0 0 0" damping="1.0" limited="true"/>
+          <site name="handleTopStart" pos="0 -0.05 0.02" size="0.005" rgba="0.8 0 0 0"/>
+        </body>
+
+        <body name="box_handle_press_top" pos="0 0.9 0.05">
+          <!-- <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.1 0.1 0.05" name="box_bottom" conaffinity="1" pos="0 0 0" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1"/> -->
+          <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.1 0.1 0.05" name="box_handle_press_top_top" conaffinity="1" pos="0 0 0.16" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1"/>
+          <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.035 0.1 0.08" name="box_handle_press_top_left" conaffinity="1" pos="0.065 0 0.08" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1"/>
+          <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.035 0.1 0.08" name="box_handle_press_top_right" conaffinity="1" pos="-0.065 0 0.08" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1"/>
+          <site name="handleTopGoalPress" pos="0 -0.15 -0.01" size="0.005" rgba="1 1 1 0"/>
+          <site name="handleTopGoalPull" pos="0 -0.15 0.11" size="0.005" rgba="0 0 0 0"/>
+        </body>
+
+        <!-- handle press side -->
+        <body name="handle_press_side" pos="-0.2 0.7 0.14">
+          <inertial pos="0 0 0" mass="0.1" diaginertia="100000 100000 100000"/>
+          <!-- <geom name="handle_press_side" fromto="0 -0.03 0 0 0.03 0" rgba="0.3 1 0.3 1" size="0.03 0.06" type="cylinder" solref="0.02 1" conaffinity="1" contype="1" group="1"/> -->
+          <geom name="handle_press_side" type="box" pos="0 0 0" margin="0.001"
+                  size="0.05 0.03 0.02" rgba="1 0 0 1"
+                  contype="1" conaffinity="1"/>
+          <joint type="slide" range="-0.12 0" axis="0 0 1" name="handle_press_side_goal_slidez" pos="0 0 0" damping="1.0" limited="true"/>
+          <site name="handleSideStart" pos="0.05 0 0.02" size="0.005" rgba="0.8 0 0 0"/>
+
+        </body>
+
+        <body name="box_handle_press_side" pos="-0.3 0.7 0.05">
+          <!-- <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.1 0.1 0.05" name="box_bottom" conaffinity="1" pos="0 0 0" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1"/> -->
+          <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.1 0.1 0.05" name="box_handle_press_side_top" conaffinity="1" pos="0 0 0.16" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1"/>
+          <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.1 0.035 0.08" name="box_handle_press_side_left" conaffinity="1" pos="0 0.065 0.08" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1"/>
+          <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.1 0.035 0.08" name="box_handle_press_side_right" conaffinity="1" pos="0 -0.065 0.08" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1"/>
+          <site name="handleSideGoalPress" pos="-0.05 0 -0.01" size="0.005" rgba="1 1 1 0"/>
+          <site name="handleSideGoalPull" pos="-0.05 0 0.11" size="0.005" rgba="0 0 0 0"/>
+        </body>
+
+
+
+
+
+        <body name="door" pos="0 0.85 0.1">
+                <!-- <joint name="doorjoint" pos="-.16 0 0" axis="0 0 1"
+                       type="hinge" limited="true" range="-1.5708 0" damping="0.1" armature="0" /> -->
+                <geom type="box" pos="0 0 0" size="0.15 0.01 0.1"
+                      rgba=".1 .1 .9 1" contype="1" conaffinity="1" />
+                <!-- <geom type="box" pos="-0.03 -0.02 0.07" size="0.03 0.01 0.005" rgba="1 0 0 1" contype="1" conaffinity="1" name="lock"/> -->
+                <!-- <joint type="hinge" range="0 1.5708" axis="0 1 0" name="joint" pos="0 -0.01 0.07" damping="1" armature="0"/> -->
+                <!--front, parallel to door-->
+                <geom type="box" pos="0.13 -0.15 -0.05" size="0.02 0.01 0.01" rgba="0 0 0 1" contype="1" conaffinity="1" name="door_handle"/>
+                <!--front-->
+                <geom type="box" pos="0.14 -0.075 -0.05" size="0.01 0.075 0.01" rgba="0 0 0 1" contype="1" conaffinity="1"/>
+                <!-- <site name="lockStart" pos="-0.06 -0.02 0.07" size="0.005" rgba="1 0 0 1"/> -->
+        </body>
+
+        <body name="door_lock" pos="0 0.85 0.1">
+                <geom type="box" pos="0.05 -0.04 0.07" size="0.05 0.03 0.005" rgba="1 0 0 1" contype="1" conaffinity="1" name="doorLockGeom"/>
+                <joint type="hinge" range="0 1.5708" axis="0 1 0" name="doorJoint" pos="0 -0.01 0.07" damping="1" armature="0" limited="true"/>
+                <site name="doorLockStartLock" pos="0.1 -0.04 0.075" size="0.005" rgba="1 1 1 0"/>
+                <site name="doorLockStartUnlock" pos="0.1 -0.04 0.065" size="0.005" rgba="0 0 0 0"/>
+        </body>
+
+
+
+
+
+
+        <body name="dial" pos="0 0.7 0.">
+          <inertial pos="0 0 0" mass="1." diaginertia="8.80012e-0 8.80012e-0 8.80012e-0"/>
+          <geom name="dial" size=".03 .03 .03" type="box" margin="0.001"
+                contype="1" conaffinity="1" condim="3" friction="1 0.1 0.002" 
+            material="wood"/>
+          <joint type="hinge" range="-3.14 3.14" axis="0 0 1" name="dialJoint" pos="0 0 0" damping="1" armature="0" limited="true"/>
+          
+          <!-- <site name="dialStart" pos="0.03 -0.03 0.03" size="0.005" rgba="0 0 1 1"/> -->
+          <site name="dialStart" pos="0 -0.03 0.03" size="0.005" rgba="0 0 1 0"/>
+        </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <body name="faucetBase" pos="0 0.8 .05">
+        <geom name="base" rgba="0.3 1 0.3 1" size=".03 .03 .05" type="box" margin="0.001"
+                pos="0 0 0" contype="1" conaffinity="1" condim="3" friction="1 0.1 0.002" 
+            />
+      </body>
+
+      <body name="faucet" pos="0 0.8 .05">
+          <!-- <inertial pos="0 0 0" mass="1" diaginertia="8.80012e-4 8.80012e-4 8.80012e-4"/> -->
+          <geom name="handle" rgba="0.3 1 0.3 1" size=".015 .05 .015" type="box" margin="0.001"
+                pos="0 -0.05 0.065" contype="1" conaffinity="1" condim="3" friction="1 0.1 0.002" 
+            />
+          <joint type="hinge" range="-1.5708 1.5708" axis="0 0 1" name="joint" pos="0 0 0.065" damping="1" armature="0" limited="true"/>
+          <site name="faucetHandleStartOpen" pos="-0.015 -0.1 0.065" size="0.005" rgba="1 1 1 1"/>
+          <!-- <site name="handleStartClose" pos="0.015 -0.1 0.065" size="0.005" rgba="0 0 0 1"/> -->
+          <site name="faucetHandleStartClose" pos="0.015 -0.1 0.065" size="0.005" rgba="0 0 0 1"/>
+      </body>
+
+
+
+
+
+
+
+
+
+        <body name="window" pos="-0.1 0.785 0.15">
+          <geom rgba="1 1 0.1 1" type="box" contype="1" size="0.1 0.015 0.01" name="window_frame_bottom" conaffinity="1" pos="0 0 -0.09" mass="0.1" solimp="0.99 0.99 0.01" solref="0.01 1" friction="1 0.1 0.002" condim="3"/>
+          <geom rgba="1 1 0.1 1" type="box" contype="1" size="0.1 0.015 0.01" name="window_frame_top" conaffinity="1" pos="0 0 0.09" mass="0.1" solimp="0.99 0.99 0.01" solref="0.01 1" friction="1 0.1 0.002" condim="3"/>
+          <geom rgba="1 1 0.1 1" type="box" contype="1" size="0.01 0.015 0.08" name="window_frame_left" conaffinity="1" pos="-0.09 0 0" mass="0.1" solimp="0.99 0.99 0.01" solref="0.01 1" friction="1 0.1 0.002" condim="3"/>
+          <geom rgba="1 1 0.1 1" type="box" contype="1" size="0.01 0.015 0.08" name="window_frame_right" conaffinity="1" pos="0.09 0 0" mass="0.1" solimp="0.99 0.99 0.01" solref="0.01 1" friction="1 0.1 0.002" condim="3"/>
+          <geom rgba="1 1 0.1 0" type="box" contype="1" size="0.08 0.015 0.08" name="glass" conaffinity="1" pos="0 0 0" mass="0.1" solimp="0.99 0.99 0.01" solref="0.01 1" friction="1 0.1 0.002" condim="3"/>
+          <geom type="box" pos="0 -0.055 0" size="0.003 0.01 0.05" rgba="0 0 0 1" contype="1" conaffinity="1" name="windowHandle"/>
+          <geom type="box" pos="0 -0.03 -0.04" size="0.003 0.015 0.01" rgba="0 0 0 1" contype="1" conaffinity="1"/>
+          <geom type="box" pos="0 -0.03 0.04" size="0.003 0.015 0.01" rgba="0 0 0 1" contype="1" conaffinity="1"/>
+          <joint type="slide" range="0 0.2" axis="1 0 0" name="window_slidex" pos="0 0 0" damping="1.0"/>
+          <site name="windowHandleOpenStart" pos="-0.02 -0.055 0." size="0.005" rgba="1 0 0 1"/>
+          <site name="windowHandleCloseStart" pos="0.02 -0.055 0." size="0.005" rgba="0 1 0 1"/>
+        </body>
+        <body name="window_another" pos="0.1 0.815 0.15">
+          <geom rgba="1 1 0.1 1" type="box" contype="1" size="0.1 0.015 0.01" name="window_frame_bottom_another" conaffinity="1" pos="0 0 -0.09" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1" friction="1 0.1 0.002" condim="3"/>
+          <geom rgba="1 1 0.1 1" type="box" contype="1" size="0.1 0.015 0.01" name="window_frame_top_another" conaffinity="1" pos="0 0 0.09" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1" friction="1 0.1 0.002" condim="3"/>
+          <geom rgba="1 1 0.1 1" type="box" contype="1" size="0.01 0.015 0.08" name="window_frame_left_another" conaffinity="1" pos="-0.09 0 0" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1" friction="1 0.1 0.002" condim="3"/>
+          <geom rgba="1 1 0.1 1" type="box" contype="1" size="0.01 0.015 0.08" name="window_frame_right_another" conaffinity="1" pos="0.09 0 0" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1" friction="1 0.1 0.002" condim="3"/>
+          <geom rgba="1 0.3 0.3 0" type="box" contype="1" size="0.08 0.015 0.08" name="glass_another" conaffinity="1" pos="0 0 0" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1" friction="1 0.1 0.002" condim="3"/>
+        </body>
+        <body name="window_wall" pos="0. 0.8 0.03">
+          <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.4 0.03 0.03" name="wall_bottom" conaffinity="1" pos="0 0 0" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1" friction="1 0.1 0.002" condim="3"/>
+          <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.4 0.03 0.03" name="wall_top" conaffinity="1" pos="0 0 0.24" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1" friction="1 0.1 0.002" condim="3"/>
+          <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.1 0.03 0.15" name="wall_left" conaffinity="1" pos="-0.3 0 0.12" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1" friction="1 0.1 0.002" condim="3"/>
+          <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.1 0.03 0.15" name="wall_right" conaffinity="1" pos="0.3 0 0.12" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1" friction="1 0.1 0.002" condim="3"/>
+        </body>
+
+
+
+
+
+
+
+
+        <body name="peg" pos="0 0.6 0.02">
+          <inertial pos="0 0 0" mass="0.1" diaginertia="100000 100000 100000"/>
+          <geom name="peg" fromto="-0.04 0 0 0.04 0 0" rgba="0.3 1 0.3 1" size="0.02 0.04" type="cylinder" conaffinity="1" contype="1" group="1"/>
+          <joint type="slide" range="0 0.3" axis="1 0 0" name="goal_slidex" pos="0 0 0" damping="1.0" limited="true"/>
+          <site name="pegHead" pos="-0.04 0 0" size="0.005" rgba="0.8 0 0 1"/>
+          <site name="pegEnd" pos="0.04 0 0" size="0.005" rgba="0.8 0 0 1"/>
+        </body>
+
+        <body name="box" pos="-0.22 0.6 0.05">
+          <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.02 0.1 0.05" name="box_top" conaffinity="1" pos="0 0 0.06" mass="1000"/>
+          <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.02 0.035 0.08" name="box_left" conaffinity="1" pos="0 0.065 0.03" mass="1000"/>
+          <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.02 0.035 0.08" name="box_right" conaffinity="1" pos="0 -0.065 0.03" mass="1000"/>
+          <site name="hole" pos="0.02 0 -0.03" size="0.005" rgba="0 0.8 0 1"/>
+        </body>
+
+
+
+        <!-- <site name="goal" pos="-0.03 0.73 0.03" size="0.02" 
+              rgba=".8 0 0 1"/> -->
+<!--         <site name="dial_goal" pos="0. 0.73 0.03" size="0.02" 
+              rgba=".8 0 0 1"/>
+ -->
+
+
+
+<!--         <body name="dial" pos="0 0.7 0.">
+          <inertial pos="0 0 0" mass="1." diaginertia="8.80012e-0 8.80012e-0 8.80012e-0"/>
+          <geom name="dial" size=".03 .03 .03" type="box" margin="0.001"
+                contype="1" conaffinity="1" condim="3" friction="1 0.1 0.002" 
+            material="wood"/>
+          <joint type="hinge" range="-3.14 3.14" axis="0 0 1" name="joint" pos="0 0 0" damping="1" armature="0" limited="true"/>
+          
+          <site name="dialStart" pos="0 -0.03 0.03" size="0.005" rgba="0 0 1 1"/>
+        </body> -->
+        <!-- <site name="goal" pos="-0.03 0.73 0.03" size="0.02" 
+              rgba=".8 0 0 1"/> -->
+<!--         <site name="goal" pos="0. 0.73 0.03" size="0.02" 
+              rgba=".8 0 0 1"/>
+ -->
+        <!-- <body name="dial" pos="0 0.7 .05">
+          <inertial pos="0 0 0" mass="1." diaginertia="8.80012e-0 8.80012e-0 8.80012e-0"/>
+          <geom name="lever" rgba="0.3 1 0.3 1" size=".03 .1 .03" type="box" margin="0.001"
+                contype="1" conaffinity="1" condim="3" friction="1 0.1 0.002" 
+            />
+          <joint type="hinge" range="-3.14 3.14" axis="0 0 1" name="joint" pos="0 0 0" damping="1" armature="0"/>
+          <site name="dialStart" pos="-0.03 -0.1 0.03" size="0.005" rgba="1 0 0 1"/>
+        </body>
+
+        <site name="goal" pos="0.03 0.8 0.08" size="0.02" 
+              rgba=".8 0 0 1"/> -->
+
+<!--         <body name="box" pos="0 0.8 0.05">
+          <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.1 0.05 0.05" name="box_left" conaffinity="1" pos="0 0 0" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1"/>
+          <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.1 0.05 0.05" name="box_right" conaffinity="1" pos="0 0.16 0" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1"/>
+          <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.035 0.03 0.05" name="box_front" conaffinity="1" pos="0.065 0.08 0" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1"/>
+          <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.035 0.03 0.05" name="box_behind" conaffinity="1" pos="-0.065 0.08 0" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1"/>
+          <joint type="slide" range="-0.2 0." axis="0 1 0" name="goal_slidey" pos="0 0 0" damping="1.0"/>
+        </body>
+ -->    </worldbody>
+
+    <actuator>
+        <position ctrllimited="true" ctrlrange="-1 1" joint="r_close" kp="400"  user="1"/>
+        <position ctrllimited="true" ctrlrange="-1 1" joint="l_close" kp="400"  user="1"/>
+    </actuator>
+
+</mujoco>
