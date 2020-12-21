@@ -13,11 +13,12 @@ conda activate pixl2r
 ```bash
 pip install -e .
 ```
-3) Download and extract preprocssed data, by running the following commands in `PixL2R` directory:
+3) Download and extract preprocessed data, by running the following commands in `PixL2R` directory:
 ```bash
 wget https://www.cs.utexas.edu/users/ml/PixL2R/data.zip
 unzip data.zip -d data/
 ```
+(The downloaded file is ~3GB; the extracted files require 50GB of disk space.)
 
 
 ## Running Experiments
@@ -36,12 +37,9 @@ python train_policy.py --obj-id=6 --env-id=1 --reward-type=<sparse|dense> --mode
 ```
 
 
-## Generate videos to annotate: 
-1) Update the metaworld root path in src/rl/generate_videos.py
-2) Run the following command in src/rl:
-```bash
-python generate_videos.py --obj-id=6 --start=0 --end=100
-```
+## Data:
+The raw videos can be downloaded from the following link: https://www.cs.utexas.edu/users/ml/PixL2R/videos.zip  
+The videos were generated using the script `src/rl/generate_videos.py`.
 
 
 ## Acknowledgements
