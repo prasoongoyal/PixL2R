@@ -4,7 +4,37 @@
 This is the code for our CoRL 2020 paper [PixL2R: Guiding Reinforcement Learning Using Natural Language by Mapping Pixels to Rewards](https://arxiv.org/abs/2007.15543) 
 
 ## Setup:
-1) Create conda environment using the environment.yml file.
+1) Create and activate conda environment using the `environment.yml` file:
+```bash
+conda env create -f environment.yml
+conda activate pixl2r
+```
+2) Install dependencies for metaworld, by running the following command in `metaworld/` directory:
+```bash
+pip install -e .
+```
+3) Download and extract preprocssed data, by running the following commands in `PixL2R` directory:
+```bash
+wget https://www.cs.utexas.edu/users/ml/PixL2R/data.zip
+unzip data.zip -d data/
+```
+
+
+## Running Experiments
+
+1. **Supervised learning of PixL2R model**: Run the following command in `src/supervised`
+```bash
+python model.py --save-path=<save-path>
+```
+2. **Policy training without language-based rewards**: Run the following command in `src/rl`
+```bash
+python train_policy.py --obj-id=6 --env-id=1 --reward-type=<sparse|dense>
+```
+3. **Policy training with language-based rewards**: Pass the PixL2R model filepath (output of step 1) and the description id to use.
+```bash
+python train_policy.py --obj-id=6 --env-id=1 --reward-type=<sparse|dense> --model-file=/path/to/PixL2R/model --descr-id=<0|1|2>
+```
+
 
 ## Generate videos to annotate: 
 1) Update the metaworld root path in src/rl/generate_videos.py
@@ -13,24 +43,6 @@ This is the code for our CoRL 2020 paper [PixL2R: Guiding Reinforcement Learning
 python generate_videos.py --obj-id=6 --start=0 --end=100
 ```
 
-## Supervised learning:
-1) Set up data.
-2) Run the following command in src/supervised
-```bash
-python model.py --save-path=<save-path>
-```
-
-## Policy training: 
-1) Update the metaworld root path in src/rl/train_policy.py
-2) Set CUDA_VISIBLE_DEVICES environment variable to the desired GPU.
-3) Run the following command in src/rl to train the model with only extrinsic sparse or dense rewards:
-```bash
-python train_policy.py --obj-id=6 --env-id=1 --reward-type=<sparse|dense>
-```
-To train the model with language-based rewards in addition to extrinsic rewards, pass the PixL2R model file and the description id to use:
-```bash
-python train_policy.py --obj-id=6 --env-id=1 --reward-type=<sparse|dense> --model-file=/path/to/PixL2R/model --descr-id=<0|1|2>
-```
 
 ## Acknowledgements
 The codebase is based on the following repositories:
